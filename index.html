@@ -1,114 +1,185 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى حبيبتي روان ❤️</title>
+    <title>إلى أغلى ما في حياتي روان ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { background-color: #ffe5ec; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        #login-screen { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ff4d6d; }
-        #main-content { display: none; width: 100%; max-width: 500px; animation: fadeIn 2s; }
-        .card { background: white; padding: 20px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; border: 2px solid #ff4d6d; position: relative; overflow: hidden; }
-        .couple-img { width: 45%; border-radius: 15px; margin: 5px; border: 2px solid #ffb3c1; object-fit: cover; height: 180px; transition: transform 0.3s; }
-        .couple-img:hover { transform: scale(1.05); }
-        h1 { color: #ff4d6d; margin: 15px 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .message { color: #590d22; line-height: 1.8; font-size: 17px; white-space: pre-line; background: #fff0f3; padding: 20px; border-radius: 15px; text-align: right; border-right: 5px solid #ff4d6d; margin-top: 15px; }
-        .date-box { background: #ff4d6d; color: white; padding: 15px; border-radius: 15px; margin: 20px 0; font-weight: bold; font-size: 19px; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
-        input { padding: 12px; border-radius: 10px; border: 1px solid #ff4d6d; width: 80%; margin-bottom: 15px; text-align: center; font-size: 16px; }
-        button { background: #ff4d6d; color: white; border: none; padding: 10px 30px; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .heart-icon { color: #ff4d6d; font-size: 35px; animation: beat 1s infinite; margin-bottom: 10px; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        * { box-sizing: border-box; }
+        body {
+            background-color: #fff0f3;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw;
+            font-family: 'Amiri', serif;
+            overflow: hidden;
+        }
+
+        /* شاشة كلمة السر */
+        #lock-screen {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; transition: 1.5s ease-in-out;
+        }
+        #lock-screen h2 { font-family: 'Aref Ruqaa', serif; font-size: clamp(30px, 8vw, 45px); margin-bottom: 20px; }
+        #lock-screen input {
+            padding: 15px; border-radius: 30px; border: none; width: 280px;
+            text-align: center; font-size: 18px; outline: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #lock-screen button {
+            margin-top: 25px; padding: 12px 50px; border-radius: 30px;
+            border: 2px solid white; background: transparent; color: white;
+            cursor: pointer; font-size: 20px; font-weight: bold; transition: 0.3s;
+        }
+        #lock-screen button:hover { background: white; color: #ff4d6d; }
+
+        /* حاوية العرض التقديمي (القوالب) */
+        .presentation-container {
+            width: 100%; max-width: 1280px; height: 100%; max-height: 720px;
+            background: white; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden; display: none;
+        }
+
+        .slide {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 40px; opacity: 0; transform: translateY(20px);
+            transition: all 0.8s ease; text-align: center; pointer-events: none;
+        }
+        .slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; z-index: 5; }
+
+        h1 { font-family: 'Aref Ruqaa', serif; font-size: clamp(35px, 6vw, 60px); color: #ff4d6d; margin: 10px 0; }
+        p { font-size: clamp(18px, 4vw, 24px); color: #590d22; line-height: 1.6; max-width: 85%; }
+        
+        .image-container {
+            width: 320px; height: 320px;
+            border-radius: 20px; border: 8px solid #ffcad4;
+            overflow: hidden; margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .date-highlight {
+            background: #ff4d6d; color: white;
+            padding: 20px 40px; border-radius: 50px;
+            font-size: clamp(24px, 5vw, 35px); font-weight: bold;
+            margin: 20px 0; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+        }
+
+        .nav-controls {
+            position: absolute; bottom: 30px; left: 0; right: 0;
+            display: flex; justify-content: center; gap: 20px; z-index: 10;
+        }
+        .btn-nav {
+            background: #ff4d6d; color: white; border: none;
+            padding: 12px 25px; border-radius: 15px; cursor: pointer;
+            font-size: 18px; font-weight: bold; transition: 0.3s;
+        }
+        .btn-nav:hover { background: #590d22; transform: scale(1.05); }
+
+        .bg-heart { position: absolute; color: rgba(255, 77, 109, 0.04); font-size: 250px; z-index: -1; }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="heart-icon">❤️</div>
-        <h2 style="color: #ff4d6d;">مكاننا الخاص يا روان</h2>
-        <p style="color: #590d22; font-size: 17px;">اكتبي كلمة السر اللي اتفقنا عليها...</p>
-        <input type="password" id="passInput" placeholder="كلمة السر...">
-        <br>
-        <button onclick="checkPass()">افتحي قلبي ❤️</button>
+    <div id="lock-screen">
+        <i class="fa-solid fa-heart-pulse" style="font-size: 80px; margin-bottom: 15px;"></i>
+        <h2>مكاننا الخاص يا روان ❤️</h2>
+        <input type="password" id="passInput" placeholder="اكتبي كلمة السر هنا...">
+        <button onclick="unlock()">افتحي قلبي ❤️</button>
     </div>
 
-    <div id="main-content">
-        <div class="card">
-            <img src="https://i.postimg.cc/85bN5hHj/Whats-App-Image-2024-04-26-at-12-07-39-AM.jpg" class="couple-img" id="img1" alt="غوايش الحب">
-            <img src="https://i.postimg.cc/vB0sT8mX/Whats-App-Image-2024-04-26-at-12-07-40-AM.jpg" class="couple-img" id="img2" alt="خلفية روان وأحمد">
-            
+    <audio id="loveSong" loop>
+        <source src="https://www.mboxdrive.com/Angham_Hala_Khassa.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="presentation-container" id="main-deck">
+        <i class="fa-solid fa-heart bg-heart" style="top: -100px; left: -100px;"></i>
+        
+        <div class="slide active">
             <h1>يا حبيبتي ❤️</h1>
-            
-            <div class="message">
-أنا مش عارف إزاي يومي كان بيعدّي قبل ما أدخلك فيه… بس دلوقتي أي حاجة في حياتي بقت ليها طعم مختلف من وقت ما عرفتك 💕
+            <p>أنا مش عارف إزاي يومي كان بيعدّي قبل ما أدخلك فيه… بس دلوقتي أي حاجة في حياتي بقت ليها طعم مختلف من وقت ما عرفتك 💕</p>
+        </div>
 
-إنتِ مش بس حبيبة، إنتِ راحة وسكينة وسبب إني أبتسم من غير سبب 🤍
-كل رسالة منك كأنها بتطبطب على قلبي وتقولّه “اهدى… أنا هنا” 💌
-
-بحبك بطريقة مش سهلة تتشرح… بحبك في التفاصيل الصغيرة: في صوتك، في طريقتك، في ضحكتك اللي بتخلي الدنيا أهدى 🌸
-وبحبك في اللحظات اللي ما بين الكلام، لما بس أكون مطمّن إنك موجودة ❤️
-
-إنتِ بالنسبالي مش مجرد شخص… إنتِ إحساس جميل عايش جوا قلبي، وكل يوم بيكبر ويزيد 💖
-ولو الدنيا كلها اتقلبت، وجودك لوحده كفاية يخليني واقف ثابت 🤍
-
-بحس إن قلبي بيدور عليك حتى وإنتِ قريبة… كأنه بيقول: “هي دي المكان الصح” 💞
-وكل مرة أفكر فيك، بحس إن في حاجة جوايا بتبتسم من غير ما أطلب منها 😭❤️
-
-أنا مش عايز حاجة من الدنيا غير إنك تفضلي جنبي… بنفس الحب، بنفس الحنية، وبنفس الأمان اللي بحسه وإنتِ موجودة 💘
-
-بحبك قد ما الكلمات تقدر توصل… ويمكن أكتر كمان 💗
-ومهما كتبت، هيفضل في قلبي كلام أكبر من أي حروف 🤍💞❤️
+        <div class="slide">
+            <div class="image-container">
+                <img src="https://i.postimg.cc/85bN5hHj/Whats-App-Image-2024-04-26-at-12-07-39-AM.jpg" alt="ذكرى">
             </div>
+            <h1>إنتِ السكينة 🤍</h1>
+            <p>إنتِ مش بس حبيبة، إنتِ راحة وسكينة وسبب إني أبتسم من غير سبب.. كل رسالة منك كأنها بتطبطب على قلبي وتقولّه “اهدى… أنا هنا” 💌</p>
+        </div>
 
-            <div class="date-box" id="counter">
-                بقالنا مع بعض...
+        <div class="slide">
+            <div class="date-highlight">24/2/2026 ✨</div>
+            <p style="text-align: justify; background: #fffafb; padding: 25px; border-radius: 15px; border-right: 5px solid #ff4d6d;">
+                اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… بس الغريب إنك لما تفكر فيه، تحس إنه كان فيه حاجة مختلفة 💖 كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة.
+            </p>
+        </div>
+
+        <div class="slide">
+            <h1>إحساس دافي 💞</h1>
+            <p>
+                فيه أيام بتعدّي عادي جدًا… وفيه أيام زي ده، بتحس إنها كانت بتضحك وانت مش واخد بالك. تفاصيل صغيرة، نبرة كلام، لحظة اهتمام، وكلها تسيب أثرها من غير ما تستأذن 💗
+            </p>
+        </div>
+
+        <div class="slide">
+            <div id="days-box" style="background: #ff4d6d; color: white; width: 200px; height: 200px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px;">
+                <span id="counter" style="font-size: 50px; font-weight: bold;">0</span>
+                <span style="font-size: 16px;">يوم حب ❤️</span>
             </div>
+            <h1>حكايتنا مستمرة</h1>
+            <p>24/2/2026… يوم بسيط، بس واضح إنه ماكنش عابر 💕✨</p>
+        </div>
 
-            <audio id="bgMusic" loop>
-                <source src="https://getsnap.link/frrcMWWYQis?share_arg3=copy%20link" type="audio/mpeg">
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-            </audio>
-            <p style="font-size: 11px; color: #ff85a1; margin-top: 10px;">(الموسيقى تعمل تلقائياً عند الدخول)</p>
+        <div class="slide">
+            <div class="image-container">
+                <img src="https://i.postimg.cc/vB0sT8mX/Whats-App-Image-2024-04-26-at-12-07-40-AM.jpg" alt="روان وأحمد">
+            </div>
+            <h1>بحبك للأبد 💖</h1>
+            <p>أنا مش عايز حاجة من الدنيا غير إنك تفضلي جنبي… بنفس الحب، بنفس الحنية، وبنفس الأمان 💘</p>
+        </div>
+
+        <div class="nav-controls">
+            <button class="btn-nav" onclick="moveSlide(-1)">السابق</button>
+            <button class="btn-nav" onclick="moveSlide(1)">التالي</button>
         </div>
     </div>
 
     <script>
-        function checkPass() {
-            var pass = document.getElementById("passInput").value;
-            // الباسورد المطلوب
-            if (pass.toLowerCase() == "bahabek ya rewan") {
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
-                var audio = document.getElementById("bgMusic");
-                // محاولة التشغيل التلقائي
-                var playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function(error) {
-                        console.log("المتصفح منع التشغيل التلقائي، سيتم التشغيل بعد أول تفاعل");
-                    });
-                }
-                startCounter();
-            } else {
-                alert("كلمة السر غلط يا روان.. جربي تاني! ❤️");
-            }
+        function unlock() {
+            const val = document.getElementById('passInput').value;
+            if(val.toLowerCase() === 'bahabek ya rewan') {
+                document.getElementById('lock-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('lock-screen').style.display = 'none';
+                    document.getElementById('main-deck').style.display = 'block';
+                }, 1500);
+                document.getElementById('loveSong').play();
+                runCounter();
+            } else { alert('كلمة السر غلط يا روان.. ❤️'); }
         }
 
-        function startCounter() {
-            // المعاد اللي حددته: 24/2/2026
-            // في البرمجة: السنة، (الشهر-1)، اليوم
-            var startDate = new Date(2026, 1, 24); 
-            var now = new Date();
-            var diff = now - startDate;
-            
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            
-            if (days < 0) {
-                // عد تنازلي
-                document.getElementById("counter").innerHTML = "عد تنازلي ليومنا المميز: " + Math.abs(days) + " يوم موعود ❤️";
-            } else {
-                // عد تصاعدي
-                document.getElementById("counter").innerHTML = "فات على أجمل يوم في حياتنا " + days + " يوم ❤️";
-            }
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        function moveSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        function runCounter() {
+            const start = new Date(2026, 1, 24); 
+            const today = new Date();
+            const days = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+            document.getElementById('counter').innerText = days >= 0 ? days : 0;
         }
     </script>
 </body>
