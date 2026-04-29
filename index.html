@@ -8,17 +8,17 @@
     <style>
         body { background-color: #fff0f3; margin: 0; font-family: 'Amiri', serif; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
         #lock-screen { position: fixed; inset: 0; background: #ff4d6d; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; transition: 0.8s; }
-        #lock-screen input { padding: 12px; border-radius: 25px; border: none; width: 250px; text-align: center; margin-bottom: 15px; }
+        #lock-screen input { padding: 12px; border-radius: 25px; border: none; width: 250px; text-align: center; margin-bottom: 15px; font-size: 16px; }
         #lock-screen button { padding: 10px 40px; border-radius: 25px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; }
-        .deck { width: 100%; max-width: 500px; height: 600px; background: white; display: none; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 20px; }
+        .deck { width: 90%; max-width: 450px; height: 550px; background: white; display: none; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 20px; border: 2px solid #ff4d6d; }
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: 0.5s; text-align: center; }
         .slide.active { opacity: 1; }
-        .img-box { width: 280px; height: 280px; border: 5px solid #ffcad4; border-radius: 15px; overflow: hidden; margin-bottom: 15px; }
+        .img-box { width: 280px; height: 280px; border: 5px solid #ffcad4; border-radius: 15px; overflow: hidden; margin-bottom: 15px; background: #f0f0f0; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-family: 'Aref Ruqaa', serif; color: #ff4d6d; margin: 10px 0; }
-        p { font-size: 18px; color: #590d22; line-height: 1.5; }
+        h1 { font-family: 'Aref Ruqaa', serif; color: #ff4d6d; margin: 10px 0; font-size: 28px; }
+        p { font-size: 18px; color: #590d22; line-height: 1.5; padding: 0 10px; }
         .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; }
-        .nav button { background: #ff4d6d; color: white; border: none; padding: 8px 25px; border-radius: 10px; cursor: pointer; }
+        .nav button { background: #ff4d6d; color: white; border: none; padding: 8px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -41,7 +41,7 @@
 
         <div class="slide">
             <div class="img-box">
-                <img src="205848.jpg" alt="ذكرى">
+                <img src="https://raw.githubusercontent.com/ahmedali01025150896-collab/love-letter-/main/205848.jpg" alt="ذكرى">
             </div>
             <h1>إنتِ السكينة 🤍</h1>
             <p>كل رسالة منك بتطبطب على قلبي وتقولّه “اهدى… أنا هنا” 💌</p>
@@ -49,7 +49,7 @@
 
         <div class="slide">
             <div class="img-box">
-                <img src="205387.png" alt="أحمد وروان">
+                <img src="https://raw.githubusercontent.com/ahmedali01025150896-collab/love-letter-/main/205387.png" alt="أحمد وروان">
             </div>
             <h1>بحبك للأبد 💖</h1>
             <p>أنا مش عايز من الدنيا غير إنك تفضلي جنبي بنفس الحنية والأمان 💘</p>
@@ -63,11 +63,15 @@
 
     <script>
         function start() {
-            if(document.getElementById('pw').value.toLowerCase() === 'bahabek ya rewan') {
+            var val = document.getElementById('pw').value.toLowerCase();
+            if(val === 'bahabek ya rewan') {
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-deck').style.display = 'block';
-                document.getElementById('bg-music').play();
-            } else { alert('كلمة السر غلط ❤️'); }
+                var audio = document.getElementById('bg-music');
+                audio.play().catch(function(e) { console.log("Audio play failed"); });
+            } else {
+                alert('كلمة السر غلط يا روان.. جربي تاني ❤️');
+            }
         }
         let current = 0;
         const slides = document.querySelectorAll('.slide');
@@ -79,4 +83,5 @@
     </script>
 </body>
 </html>
+
 
