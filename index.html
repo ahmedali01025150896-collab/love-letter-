@@ -12,79 +12,73 @@
         body { 
             background: var(--bg-color); 
             font-family: 'Cairo', sans-serif; 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            height: 100vh; width: 100vw;
+            display: flex; justify-content: center; align-items: center; 
             overflow: hidden;
         }
 
+        /* خلفية ناعمة وشيك */
         .gradient-bg {
             position: fixed; inset: 0;
-            background: radial-gradient(circle at 50% 50%, #fff0f3 0%, #ffcad4 100%);
+            background: linear-gradient(135deg, #fff0f3 0%, #ffcad4 100%);
             z-index: -1;
         }
 
+        /* شاشة القفل */
         #lock-screen {
             position: fixed; inset: 0;
             background: var(--main-color);
             color: white; z-index: 100;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: 1s ease-in-out;
+            transition: 0.8s ease-in-out;
         }
 
-        #lock-screen h2 { font-family: 'Reem Kufi', sans-serif; margin-bottom: 20px; font-size: 30px; text-align: center; }
         #lock-screen input { 
             padding: 15px; border-radius: 50px; border: none; width: 280px; 
             text-align: center; font-size: 18px; outline: none; margin-bottom: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         #lock-screen button { 
             padding: 12px 60px; border-radius: 50px; border: 2px solid white; 
             background: transparent; color: white; cursor: pointer; font-size: 18px; font-weight: bold;
-            transition: 0.3s;
         }
 
+        /* كارت المحتوى */
         .main-card {
-            width: 95%; max-width: 500px; height: 650px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px; position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            width: 90%; max-width: 450px; height: 600px;
+            background: white; border-radius: 30px; position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             display: none; flex-direction: column; align-items: center; justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--main-color);
         }
 
         .slide {
             position: absolute; inset: 0;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 25px; opacity: 0; transition: 0.8s ease-in-out; text-align: center;
+            padding: 25px; opacity: 0; transition: 0.6s ease; text-align: center;
             overflow-y: auto;
         }
-        .slide.active { opacity: 1; z-index: 2; }
+        .slide.active { opacity: 1; z-index: 5; }
 
         .img-frame {
-            width: 250px; height: 250px; border-radius: 25px;
-            overflow: hidden; border: 6px solid white;
-            box-shadow: 0 15px 30px rgba(255, 77, 109, 0.2);
+            width: 260px; height: 260px; border-radius: 20px;
+            overflow: hidden; border: 5px solid #ffcad4;
             margin-bottom: 15px; flex-shrink: 0;
         }
         .img-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { color: var(--main-color); font-family: 'Reem Kufi', sans-serif; font-size: 28px; margin-bottom: 10px; }
-        p { color: #590d22; font-size: 17px; line-height: 1.5; font-weight: 500; }
+        h1 { color: var(--main-color); font-family: 'Reem Kufi', sans-serif; font-size: 26px; margin-bottom: 10px; }
+        p { color: #590d22; font-size: 16px; line-height: 1.6; }
 
-        .date-badge {
+        .date-text {
             background: var(--main-color); color: white;
-            padding: 5px 20px; border-radius: 50px;
-            font-size: 20px; margin-bottom: 15px; font-weight: bold;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 18px; margin-bottom: 10px; font-weight: bold;
         }
 
-        .nav-btns { position: absolute; bottom: 20px; display: flex; gap: 20px; z-index: 10; }
+        .nav-btns { position: absolute; bottom: 20px; display: flex; gap: 20px; }
         .nav-btns button { 
             background: var(--main-color); color: white; border: none; 
-            padding: 10px 25px; border-radius: 15px; cursor: pointer; font-weight: bold;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+            padding: 10px 25px; border-radius: 10px; cursor: pointer;
         }
     </style>
 </head>
@@ -93,13 +87,13 @@
     <div class="gradient-bg"></div>
 
     <div id="lock-screen">
-        <h2 id="lock-text">رسالة خاصة لروان ❤️</h2>
-        <input type="password" id="passwordField" placeholder="اكتبي كلمة السر...">
+        <h2 style="margin-bottom:20px;">رسالة خاصة لروان ❤️</h2>
+        <input type="password" id="pw" placeholder="كلمة السر...">
         <button onclick="unlock()">دخول ❤️</button>
     </div>
 
-    <audio id="love-music" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
     <div class="main-card" id="card">
@@ -110,75 +104,59 @@
 
         <div class="slide">
             <div class="img-frame">
-                <img src="205848.jpg" alt="ذكرياتنا">
+                <img src="205848.jpg" alt="صورة 1">
             </div>
             <h1>إنتِ السكينة 🤍</h1>
             <p>وجودك جنبي بيهوّن أي حاجة صعبة، إنتِ الأمان اللي كنت بدور عليه 💌</p>
         </div>
 
         <div class="slide">
-            <div class="date-badge">24/2/2026</div>
+            <div class="date-text">24/2/2026</div>
             <p>
-                اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… بس الغريب إنك لما تفكر فيه، تحس إنه كان فيه حاجة مختلفة 💖<br><br>
-                كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة. حاجة بسيطة، بس بتلمع جوه الذاكرة زي ضوء صغير بيرفض يطفي ✨💕<br><br>
-                فيه أيام بتعدّي عادي جدًا… وفيه أيام زي ده، بتحس إنها كانت بتضحك وانت مش واخد بالك. تفاصيل صغيرة، نبرة كلام، لحظة اهتمام، وكلها تسيب أثرها من غير ما تستأذن 💗
+                اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… بس الغريب إنك لما تفكر فيه، تحس إنه كان فيه حاجة مختلفة 💖<br>
+                كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة. حاجة بسيطة، بس بتلمع جوه الذاكرة زي ضوء صغير بيرفض يطفي ✨💕
             </p>
         </div>
 
         <div class="slide">
-            <h1>إحساس دافي 💞</h1>
             <p>
-                والأجمل؟ إن الحاجات اللي ما اتقالتش بصوت عالي ساعات هي اللي بتفضل عايشة أكتر… في شكل إحساس دافي كده، ييجي في بال القلب فجأة ويقول: “فاكر؟” 💞🌷<br><br>
-                24/2/2026… يوم بسيط، بس واضح إنه ماكنش عابر زي ما كان متخيل نفسه 💕✨
+                فيه أيام بتعدّي عادي جدًا… وفيه أيام زي ده، بتحس إنها كانت بتضحك وانت مش واخد بالك. تفاصيل صغيرة، نبرة كلام، لحظة اهتمام، وكلها تسيب أثرها من غير ما تستأذن 💗<br><br>
+                والأجمل؟ إن الحاجات اللي ما اتقالتش بصوت عالي ساعات هي اللي بتفضل عايشة أكتر… ييجي في بال القلب فجأة ويقول: “فاكر؟” 💞🌷
             </p>
         </div>
 
         <div class="slide">
             <div class="img-frame">
-                <img src="205387.png" alt="أحمد وروان">
+                <img src="205387.png" alt="صورة 2">
             </div>
             <h1>بحبك للأبد 💖</h1>
             <p>وعد مني هفضل جنبك ومعاكي، ومفيش حاجة في الدنيا هتبعدني عنك يا روان 💘</p>
         </div>
 
         <div class="nav-btns">
-            <button onclick="prev()">السابق</button>
-            <button onclick="next()">التالي</button>
+            <button onclick="go(-1)">السابق</button>
+            <button onclick="go(1)">التالي</button>
         </div>
     </div>
 
     <script>
         function unlock() {
-            var pass = document.getElementById('passwordField').value.toLowerCase();
-            if(pass === 'bahabek ya rewan') {
-                var audio = document.getElementById('love-music');
-                
-                // محاولة تشغيل الصوت فوراً
-                audio.play().catch(function(error) {
-                    console.log("Auto-play prevented. Audio will play on next interaction.");
-                });
-
-                document.getElementById('lock-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('lock-screen').style.display = 'none';
-                    document.getElementById('card').style.display = 'flex';
-                }, 1000);
-            } else {
-                alert('كلمة السر غلط يا روان ❤️');
-            }
+            var input = document.getElementById('pw').value.toLowerCase();
+            if(input === 'bahabek ya rewan') {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('card').style.display = 'flex';
+                // تشغيل اللحن فوراً
+                var audio = document.getElementById('bg-music');
+                audio.play();
+            } else { alert('كلمة السر غلط يا روان ❤️'); }
         }
 
-        let current = 0;
+        let idx = 0;
         const slides = document.querySelectorAll('.slide');
-        function next() {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
-        }
-        function prev() {
-            slides[current].classList.remove('active');
-            current = (current - 1 + slides.length) % slides.length;
-            slides[current].classList.add('active');
+        function go(n) {
+            slides[idx].classList.remove('active');
+            idx = (idx + n + slides.length) % slides.length;
+            slides[idx].classList.add('active');
         }
     </script>
 </body>
