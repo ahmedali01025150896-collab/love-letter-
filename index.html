@@ -1,12 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رسالة خاصة لك</title>
+    <title>رسالة خاصة</title>
     <style>
         body { background-color: #fff0f3; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #content { display: none; text-align: center; }
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; border: 2px solid #ff4d6d; }
         h1 { color: #ff4d6d; font-size: 24px; }
         p { color: #590d22; font-size: 18px; line-height: 1.6; }
@@ -15,11 +15,23 @@
     </style>
 </head>
 <body>
-    <div class="card">
+
+    <div id="content" class="card">
         <div class="heart">❤️</div>
         <h1>رسالة خاصة لك</h1>
         <p>أردتُ فقط أن أخبركِ بأنكِ شخصية رائعة ومميزة جداً في حياتي.</p>
         <p>كل لحظة معكِ هي هدية جميلة. ❤️</p>
     </div>
+
+    <script>
+        var password = prompt("هذه الرسالة خاصة.. من فضلك أدخل كلمة السر لرؤيتها:");
+        if (password == "1234") {
+            document.getElementById("content").style.display = "block";
+        } else {
+            alert("كلمة السر خطأ!");
+            location.reload();
+        }
+    </script>
+
 </body>
 </html>
