@@ -45,14 +45,12 @@
     </div>
 
     <audio id="music" loop preload="auto">
-        <source src="https://www.gstatic.com/voice/shared/music/classical_piano.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card" id="card">
         <div class="slide active">
-            <div class="img-box">
-                <img src="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600" alt="بداية">
-            </div>
+            <div class="img-box"><img src="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
             <h1>يا كل دنيتي ❤️</h1>
             <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني.. كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
         </div>
@@ -60,43 +58,21 @@
         <div class="slide">
             <div class="date">حلمنا الأول (1) ✨</div>
             <div class="dream-content">
-                <p>
-                    فاكرة لما حلمتي إننا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة بابا خرج يصلي وماما ظهرت.. التوتر زاد لما لقيتيني واقف وسط ولاد على أول الشارع وقاعد على حاجة بتتحرك وبقولك "هتيجي ازاي؟ ارجعي تاني".. <br><br>
-                    حتى ماما لما شافتك بالماية وسألتك رايحة فين، قلتِ لها "رايحة لصاحبتي".. وأجمل حتة لما اختك شافت حد عندك على التيك توك وماما بتسألك "مين ده؟" وانتِ بكل براءة قلتِ "تلاقيه عامل فولو" 😂❤️
-                </p>
+                <p>فاكرة لما حلمتي إننا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة بابا خرج يصلي وماما ظهرت.. التوتر زاد لما لقيتيني واقف وسط ولاد على أول الشارع..</p>
             </div>
         </div>
 
         <div class="slide">
             <div class="date">حلمنا الأول (2) ✨</div>
             <div class="dream-content">
-                <p>
-                    وبعدين رحتِ وقلتِ لي "هعدي وامشي ورايا".. كنت أنا قاعد على سلم، أول ما شفتك رحت ناطط ودخلنا شارع ضيق.. بصيتِ لي بكسوف ووشك احمرّ أوي.. <br><br>
-                    اديتك ورقة العربي وكنت ماسك فيها جامد، ولما سألتيني "في إيه؟" قلت لك "انتِ ماسكة بتاعتي معاكي".. <br><br>
-                    اللحظة اللي لمست فيها إيدك بالغلط وبصيتي باستغراب، وضحكت أنا وقلت لك الكلمة اللي طالعة من قلبي: <b>"سلامتك يا قلبي"</b>.. مش مجرد حلم، دي بداية حكايتنا ❤️
-                </p>
+                <p>اللحظة اللي لمست فيها إيدك بالغلط وبصيتي باستغراب، وضحكت أنا وقلت لك الكلمة اللي طالعة من قلبي: <b>"سلامتك يا قلبي"</b>.. ❤️</p>
             </div>
         </div>
 
         <div class="slide">
-            <div class="img-box">
-                <img src="https://images.pexels.com/photos/715124/pexels-photo-715124.jpeg?auto=compress&cs=tinysrgb&w=600" alt="أمان">
-            </div>
-            <h1>إنتِ السكينة 🤍</h1>
-            <p>وجودك جنبي بيهوّن أي حاجة صعبة، إنتِ الأمان اللي كنت بدور عليه 💌</p>
-        </div>
-
-        <div class="slide">
-            <div class="date">24/2/2026</div>
-            <p>اليوم ده مش محتاج يشرح نفسه.. في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة ✨💕</p>
-        </div>
-
-        <div class="slide">
-            <div class="img-box">
-                <img src="https://images.pexels.com/photos/1759531/pexels-photo-1759531.jpeg?auto=compress&cs=tinysrgb&w=600" alt="وعد">
-            </div>
+            <div class="img-box"><img src="https://images.pexels.com/photos/1759531/pexels-photo-1759531.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
             <h1>بحبك للأبد 💖</h1>
-            <p>وعد مني هفضل جنبك ومعاكي، ومفيش حاجة في الدنيا هتبعدني عنك يا روان 💘</p>
+            <p>وعد مني هفضل جنبك ومعاكي يا روان 💘</p>
         </div>
 
         <div class="nav">
@@ -116,10 +92,7 @@
                 }, 800);
                 
                 const audio = document.getElementById('music');
-                // تشغيل الموسيقى بعد تفاعل المستخدم (الضغط على الزر)
-                audio.play().catch(e => {
-                    console.log("Audio started");
-                });
+                audio.play().catch(e => console.log("Audio interaction required"));
             } else { 
                 alert('كلمة السر غلط يا روان ❤️'); 
             }
