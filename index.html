@@ -8,28 +8,32 @@
     <style>
         :root { --main: #ff4d6d; --bg: #fff0f3; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); font-family: 'Cairo', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        body { background: var(--bg); font-family: 'Cairo', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; direction: rtl; }
         .gradient-bg { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #fff0f3 0%, #ffcad4 100%); z-index: -1; }
         
-        /* شاشة القفل */
-        #lock { position: fixed; inset: 0; background: var(--main); color: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s; }
-        #lock input { padding: 15px; border-radius: 50px; border: none; width: 280px; text-align: center; font-size: 18px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        #lock button { padding: 12px 60px; border-radius: 50px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; }
+        #lock { position: fixed; inset: 0; background: var(--main); color: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s; padding: 20px; text-align: center; }
+        #lock input { padding: 15px; border-radius: 50px; border: none; width: 100%; max-width: 280px; text-align: center; font-size: 18px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); outline: none; }
+        #lock button { padding: 12px 60px; border-radius: 50px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; font-size: 18px; transition: 0.3s; }
 
-        /* الكارت الرئيسي */
-        .card { width: 95%; max-width: 450px; height: 600px; background: rgba(255, 255, 255, 0.95); border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; overflow: hidden; border: 1px solid white; }
-        .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; opacity: 0; transition: 0.6s; text-align: center; }
+        .card { width: 95%; max-width: 480px; height: 85vh; max-height: 700px; background: rgba(255, 255, 255, 0.95); border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; overflow: hidden; border: 1px solid white; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; opacity: 0; transition: 0.6s; text-align: center; z-index: 1; overflow-y: auto; }
         .slide.active { opacity: 1; z-index: 5; }
 
-        .img-box { width: 260px; height: 260px; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .img-box { width: 100%; max-width: 250px; height: 250px; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; flex-shrink: 0; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { color: var(--main); font-family: 'Reem Kufi', sans-serif; font-size: 28px; margin-bottom: 15px; }
-        p { color: #590d22; font-size: 17px; line-height: 1.6; font-weight: 500; }
-        .date { background: var(--main); color: white; padding: 5px 20px; border-radius: 50px; font-weight: bold; margin-bottom: 15px; }
+        h1 { color: var(--main); font-family: 'Reem Kufi', sans-serif; font-size: 24px; margin-bottom: 10px; }
+        p { color: #590d22; font-size: 15px; line-height: 1.6; font-weight: 500; }
+        
+        /* ستايل خاص لشريحة الحلم */
+        .dream-content { background: #fff5f7; padding: 15px; border-radius: 20px; border: 1px dashed var(--main); font-size: 14px !important; text-align: right; max-height: 350px; overflow-y: auto; }
 
-        .nav { position: absolute; bottom: 25px; width: 100%; display: flex; justify-content: space-around; z-index: 10; }
-        .nav button { background: var(--main); color: white; border: none; padding: 10px 30px; border-radius: 15px; cursor: pointer; font-weight: bold; }
+        .date { background: var(--main); color: white; padding: 5px 25px; border-radius: 50px; font-weight: bold; margin-bottom: 15px; }
+
+        .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 10; padding: 0 20px; }
+        .nav button { background: var(--main); color: white; border: none; padding: 10px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; flex: 1; margin: 0 5px; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -37,38 +41,47 @@
     <div class="gradient-bg"></div>
 
     <div id="lock">
-        <h2 style="margin-bottom:20px; font-family:'Reem Kufi';">مكاننا الخاص يا روان ❤️</h2>
+        <h2 style="margin-bottom:25px; font-family:'Reem Kufi'; font-size: 30px;">مكاننا الخاص يا روان ❤️</h2>
         <input type="password" id="pass" placeholder="اكتبي كلمة السر...">
         <button onclick="start()">دخول ❤️</button>
     </div>
 
-    <audio id="music" loop>
-        <source src="https://vt.tiktok.com/ZS9PCCa1p/" type="audio/mpeg">
+    <audio id="music" loop preload="auto">
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card" id="card">
         <div class="slide active">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1518510810343-40e137b79b69?q=80&w=600&auto=format&fit=crop"></div>
             <h1>يا كل دنيتي ❤️</h1>
-            <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني، كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
+            <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني.. كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
         </div>
 
         <div class="slide">
-            <div class="img-box"><img src="205848.jpg" alt="ذكرى"></div>
+            <div class="date">أول حلم جمعنا ✨</div>
+            <h1>حلم الماية وورقة العربي ❤️</h1>
+            <div class="dream-content">
+                <p>
+                    فاكرة لما حلمتي إننا كنا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة الدنيا اتقلبت.. بابا خارج يصلي وماما كمان ظهرت، والتوتر زاد لما لقيتيني واقف وسط ولاد ومش عارفة تعدي.. <br><br>
+                    أجمل حتة لما عديت وراكي ونطيت من على السلم ودخلنا الشارع الضيق.. بصيتِ لي بكسوف ووشك احمرّ وإحنا بنسلم على بعض ورقة العربي.. ولما لمست إيدك بالغلط وبصيتِ باستغراب.. <br><br>
+                    وفي الآخر ضحكت وقلت لك: <b>"سلامتك يا قلبي"</b>.. حلم مليان تفاصيل تشبهنا أوي ❤️
+                </p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1518199266791-c37632c01efb?q=80&w=600&auto=format&fit=crop"></div>
             <h1>إنتِ السكينة 🤍</h1>
             <p>وجودك جنبي بيهوّن أي حاجة صعبة، إنتِ الأمان اللي كنت بدور عليه 💌</p>
         </div>
 
         <div class="slide">
             <div class="date">24/2/2026</div>
-            <p>اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… بس الغريب إنك لما تفكر فيه، تحس إنه كان فيه حاجة مختلفة 💖<br><br>كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة ✨💕</p>
+            <p>اليوم ده مش محتاج يشرح نفسه.. في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة ✨💕</p>
         </div>
 
         <div class="slide">
-            <p>فيه أيام بتعدّي عادي جدًا… وفيه أيام زي ده، بتحس إنها كانت بتضحك وانت مش واخد بالك. تفاصيل صغيرة، نبرة كلام، لحظة اهتمام، وكلها تسيب أثرها من غير ما تستأذن 💗<br><br>والأجمل؟ إن الحاجات اللي ما اتقالتش بصوت عالي ساعات هي اللي بتفضل عايشة أكتر 💞🌷</p>
-        </div>
-
-        <div class="slide">
-            <div class="img-box"><img src="205387.png" alt="أحمد وروان"></div>
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=600&auto=format&fit=crop"></div>
             <h1>بحبك للأبد 💖</h1>
             <p>وعد مني هفضل جنبك ومعاكي، ومفيش حاجة في الدنيا هتبعدني عنك يا روان 💘</p>
         </div>
@@ -81,27 +94,19 @@
 
     <script>
         function start() {
-            // كلمة السر: bahabek ya rewan
-            if(document.getElementById('pass').value.toLowerCase() === 'bahabek ya rewan') {
+            const passInput = document.getElementById('pass').value.trim();
+            if(passInput === 'bahabek ya rewan') {
                 document.getElementById('lock').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('lock').style.display = 'none';
                     document.getElementById('card').style.display = 'block';
                 }, 800);
-                
-                // تشغيل اللحن عند الدخول
-                const audio = document.getElementById('music');
-                audio.play().catch(error => {
-                    console.log("المرصفح منع التشغيل التلقائي، سيتم المحاولة مرة أخرى عند التفاعل.");
-                });
-            } else { 
-                alert('كلمة السر غلط يا روان ❤️'); 
-            }
+                document.getElementById('music').play().catch(e => console.log("Audio block"));
+            } else { alert('كلمة السر غلط يا روان ❤️'); }
         }
         
         let cur = 0; 
         const slides = document.querySelectorAll('.slide');
-        
         function move(n) {
             slides[cur].classList.remove('active');
             cur = (cur + n + slides.length) % slides.length;
