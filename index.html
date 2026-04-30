@@ -13,25 +13,25 @@
         
         #lock { position: fixed; inset: 0; background: var(--main); color: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s; padding: 20px; text-align: center; }
         #lock input { padding: 15px; border-radius: 50px; border: none; width: 100%; max-width: 280px; text-align: center; font-size: 18px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); outline: none; }
-        #lock button { padding: 12px 60px; border-radius: 50px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; font-size: 18px; transition: 0.3s; }
+        #lock button { padding: 12px 60px; border-radius: 50px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; font-size: 18px; }
 
-        .card { width: 95%; max-width: 480px; height: 85vh; max-height: 700px; background: rgba(255, 255, 255, 0.95); border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; overflow: hidden; border: 1px solid white; animation: slideIn 0.5s ease-out; }
+        .card { width: 95%; max-width: 450px; height: 85vh; max-height: 650px; background: rgba(255, 255, 255, 0.95); border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; overflow: hidden; border: 1px solid white; animation: slideIn 0.5s ease-out; }
         @keyframes slideIn { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
         .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; opacity: 0; transition: 0.6s; text-align: center; z-index: 1; overflow-y: auto; }
         .slide.active { opacity: 1; z-index: 5; }
 
-        .img-box { width: 100%; max-width: 250px; height: 230px; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; flex-shrink: 0; }
+        .img-box { width: 230px; height: 230px; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; flex-shrink: 0; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { color: var(--main); font-family: 'Reem Kufi', sans-serif; font-size: 24px; margin-bottom: 10px; }
+        h1 { color: var(--main); font-family: 'Reem Kufi', sans-serif; font-size: 26px; margin-bottom: 10px; }
         p { color: #590d22; font-size: 15px; line-height: 1.6; font-weight: 500; }
         
-        .dream-content { background: #fff5f7; padding: 15px; border-radius: 20px; border: 1px dashed var(--main); font-size: 14px !important; text-align: right; max-height: 400px; overflow-y: auto; width: 100%; }
-        .date { background: var(--main); color: white; padding: 5px 25px; border-radius: 50px; font-weight: bold; margin-bottom: 15px; }
+        .dream-content { background: #fff5f7; padding: 15px; border-radius: 20px; border: 1px dashed var(--main); font-size: 14px !important; text-align: right; width: 100%; margin-top: 10px; }
+        .date { background: var(--main); color: white; padding: 5px 20px; border-radius: 50px; font-weight: bold; margin-bottom: 10px; }
 
-        .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 10; padding: 0 20px; }
-        .nav button { background: var(--main); color: white; border: none; padding: 10px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; flex: 1; margin: 0 5px; transition: 0.3s; }
+        .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 10; }
+        .nav button { background: var(--main); color: white; border: none; padding: 10px 25px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -39,12 +39,12 @@
     <div class="gradient-bg"></div>
 
     <div id="lock">
-        <h2 style="margin-bottom:25px; font-family:'Reem Kufi'; font-size: 30px;">مكاننا الخاص يا روان ❤️</h2>
+        <h2 style="margin-bottom:20px; font-family:'Reem Kufi';">مكاننا الخاص يا روان ❤️</h2>
         <input type="password" id="pass" placeholder="اكتبي كلمة السر...">
         <button onclick="start()">دخول ❤️</button>
     </div>
 
-    <audio id="music" loop preload="auto">
+    <audio id="music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
@@ -52,27 +52,38 @@
         <div class="slide active">
             <div class="img-box"><img src="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
             <h1>يا كل دنيتي ❤️</h1>
-            <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني.. كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
+            <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني، كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
         </div>
 
         <div class="slide">
             <div class="date">حلمنا الأول (1) ✨</div>
             <div class="dream-content">
-                <p>فاكرة لما حلمتي إننا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة بابا خرج يصلي وماما ظهرت.. التوتر زاد لما لقيتيني واقف وسط ولاد على أول الشارع..</p>
+                <p>فاكرة لما حلمتي إننا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة بابا خرج يصلي وماما ظهرت.. التوتر زاد لما لقيتيني واقف وسط ولاد على أول الشارع وقاعد على حاجة بتتحرك وبقولك "هتيجي ازاي؟ ارجعي تاني".. 😂❤️</p>
             </div>
         </div>
 
         <div class="slide">
             <div class="date">حلمنا الأول (2) ✨</div>
             <div class="dream-content">
-                <p>اللحظة اللي لمست فيها إيدك بالغلط وبصيتي باستغراب، وضحكت أنا وقلت لك الكلمة اللي طالعة من قلبي: <b>"سلامتك يا قلبي"</b>.. ❤️</p>
+                <p>اللحظة اللي لمست فيها إيدك بالغلط وبصيتي باستغراب، وضحكت أنا وقلت لك الكلمة اللي طالعة من قلبي: <b>"سلامتك يا قلبي"</b>.. مش مجرد حلم، دي بداية حكايتنا ❤️</p>
             </div>
+        </div>
+
+        <div class="slide">
+            <div class="img-box"><img src="https://images.pexels.com/photos/715124/pexels-photo-715124.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
+            <h1>إنتِ السكينة 🤍</h1>
+            <p>وجودك جنبي بيهوّن أي حاجة صعبة، إنتِ الأمان اللي كنت بدور عليه 💌</p>
+        </div>
+
+        <div class="slide">
+            <div class="date">24/2/2026</div>
+            <p>اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة ✨💕</p>
         </div>
 
         <div class="slide">
             <div class="img-box"><img src="https://images.pexels.com/photos/1759531/pexels-photo-1759531.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
             <h1>بحبك للأبد 💖</h1>
-            <p>وعد مني هفضل جنبك ومعاكي يا روان 💘</p>
+            <p>وعد مني هفضل جنبك ومعاكي، ومفيش حاجة في الدنيا هتبعدني عنك يا روان 💘</p>
         </div>
 
         <div class="nav">
@@ -83,16 +94,14 @@
 
     <script>
         function start() {
-            const passInput = document.getElementById('pass').value.trim();
-            if(passInput === 'bahabek ya rewan') {
+            const pass = document.getElementById('pass').value.toLowerCase();
+            if(pass === 'bahabek ya rewan') {
                 document.getElementById('lock').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('lock').style.display = 'none';
                     document.getElementById('card').style.display = 'block';
                 }, 800);
-                
-                const audio = document.getElementById('music');
-                audio.play().catch(e => console.log("Audio interaction required"));
+                document.getElementById('music').play().catch(e => console.log("الصوت يحتاج تفاعل"));
             } else { 
                 alert('كلمة السر غلط يا روان ❤️'); 
             }
