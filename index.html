@@ -43,7 +43,7 @@
     </div>
 
     <audio id="music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        <source src="https://vt.tiktok.com/ZS9PCCa1p/" type="audio/mpeg">
     </audio>
 
     <div class="card" id="card">
@@ -81,16 +81,27 @@
 
     <script>
         function start() {
+            // كلمة السر: bahabek ya rewan
             if(document.getElementById('pass').value.toLowerCase() === 'bahabek ya rewan') {
                 document.getElementById('lock').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('lock').style.display = 'none';
                     document.getElementById('card').style.display = 'block';
                 }, 800);
-                document.getElementById('music').play();
-            } else { alert('كلمة السر غلط يا روان ❤️'); }
+                
+                // تشغيل اللحن عند الدخول
+                const audio = document.getElementById('music');
+                audio.play().catch(error => {
+                    console.log("المرصفح منع التشغيل التلقائي، سيتم المحاولة مرة أخرى عند التفاعل.");
+                });
+            } else { 
+                alert('كلمة السر غلط يا روان ❤️'); 
+            }
         }
-        let cur = 0; const slides = document.querySelectorAll('.slide');
+        
+        let cur = 0; 
+        const slides = document.querySelectorAll('.slide');
+        
         function move(n) {
             slides[cur].classList.remove('active');
             cur = (cur + n + slides.length) % slides.length;
