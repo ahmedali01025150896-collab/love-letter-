@@ -30,6 +30,11 @@
         .dream-content { background: #fff5f7; padding: 15px; border-radius: 20px; border: 1px dashed var(--main); font-size: 14px !important; text-align: right; width: 100%; margin-top: 10px; }
         .date { background: var(--main); color: white; padding: 5px 20px; border-radius: 50px; font-weight: bold; margin-bottom: 10px; }
 
+        /* ستايل العداد الجديد */
+        .counter-box { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.1); border: 2px solid var(--main); margin: 15px 0; }
+        .counter-num { font-size: 40px; color: var(--main); font-weight: bold; display: block; }
+        .counter-text { font-size: 18px; color: #590d22; }
+
         .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 10; }
         .nav button { background: var(--main); color: white; border: none; padding: 10px 25px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; }
     </style>
@@ -53,6 +58,15 @@
             <div class="img-box"><img src="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
             <h1>يا كل دنيتي ❤️</h1>
             <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني، كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
+        </div>
+
+        <div class="slide">
+            <div class="date">منذ أن بدأنا الحديث ✨</div>
+            <div class="counter-box">
+                <span class="counter-num" id="daysCount">0</span>
+                <span class="counter-text">يوم من السعادة معكِ</span>
+            </div>
+            <p>كل يوم بيمر وإنتِ معايا هو عمر جديد بالنسبة لي ❤️</p>
         </div>
 
         <div class="slide">
@@ -93,9 +107,21 @@
     </div>
 
     <script>
+        // وظيفة حساب الأيام
+        function calculateDays() {
+            const startDate = new Date('2026-02-24');
+            const today = new Date();
+            const timeDiff = today - startDate;
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            
+            // لو التاريخ لسه مجاش هيظهر 0، لو جه هيعرض الفرق
+            document.getElementById('daysCount').innerText = days > 0 ? days : 0;
+        }
+
         function start() {
             const pass = document.getElementById('pass').value.toLowerCase();
             if(pass === 'bahabek ya rewan') {
+                calculateDays(); // تشغيل الحساب عند الدخول
                 document.getElementById('lock').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('lock').style.display = 'none';
