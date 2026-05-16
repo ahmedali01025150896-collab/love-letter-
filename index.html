@@ -3,142 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى روان ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@500&display=swap" rel="stylesheet">
+    <title>عيد ميلاد سعيد يا روان ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --main: #ff4d6d; --bg: #fff0f3; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); font-family: 'Cairo', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; direction: rtl; }
-        .gradient-bg { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #fff0f3 0%, #ffcad4 100%); z-index: -1; }
-        
-        #lock { position: fixed; inset: 0; background: var(--main); color: white; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s; padding: 20px; text-align: center; }
-        #lock input { padding: 15px; border-radius: 50px; border: none; width: 100%; max-width: 280px; text-align: center; font-size: 18px; margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); outline: none; }
-        #lock button { padding: 12px 60px; border-radius: 50px; border: 2px solid white; background: transparent; color: white; cursor: pointer; font-weight: bold; font-size: 18px; }
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+            font-family: 'Aref Ruqaa', serif; /* الخط المزخرف الأساسي */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-        .card { width: 95%; max-width: 450px; height: 85vh; max-height: 650px; background: rgba(255, 255, 255, 0.95); border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; overflow: hidden; border: 1px solid white; animation: slideIn 0.5s ease-out; }
-        @keyframes slideIn { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; opacity: 0; transition: 0.6s; text-align: center; z-index: 1; overflow-y: auto; }
-        .slide.active { opacity: 1; z-index: 5; }
+        /* خلفية النجوم المتحركة */
+        .stars-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            background: #000 url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/123163/stars.png') repeat top center;
+        }
 
-        .img-box { width: 230px; height: 230px; border-radius: 20px; overflow: hidden; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; flex-shrink: 0; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .twinkling {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/123163/twinkling.png') repeat top center;
+            animation: move-twink-back 200s linear infinite;
+        }
 
-        h1 { color: var(--main); font-family: 'Reem Kufi', sans-serif; font-size: 26px; margin-bottom: 10px; }
-        p { color: #590d22; font-size: 15px; line-height: 1.6; font-weight: 500; }
-        
-        .dream-content { background: #fff5f7; padding: 15px; border-radius: 20px; border: 1px dashed var(--main); font-size: 14px !important; text-align: right; width: 100%; margin-top: 10px; }
-        .date { background: var(--main); color: white; padding: 5px 20px; border-radius: 50px; font-weight: bold; margin-bottom: 10px; }
+        @keyframes move-twink-back {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
 
-        /* ستايل العداد الجديد */
-        .counter-box { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.1); border: 2px solid var(--main); margin: 15px 0; }
-        .counter-num { font-size: 40px; color: var(--main); font-weight: bold; display: block; }
-        .counter-text { font-size: 18px; color: #590d22; }
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
 
-        .nav { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 10; }
-        .nav button { background: var(--main); color: white; border: none; padding: 10px 25px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .content-box {
+            max-width: 750px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 77, 77, 0.4);
+            box-shadow: 0 0 35px rgba(255, 77, 77, 0.3);
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 3.2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 77, 77, 0.8);
+        }
+
+        .message-p {
+            font-size: 1.8rem;
+            line-height: 2.3;
+            margin-bottom: 25px;
+            display: block;
+            font-family: 'Amiri', serif; /* خط القراءة المريح والمزخرف */
+        }
+
+        /* تأثير الكلمات */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.6s ease-out;
+            margin: 0 5px;
+        }
+
+        .word.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight {
+            color: #ff4d4d;
+            font-weight: bold;
+            font-size: 2.2rem;
+            font-family: 'Aref Ruqaa', serif;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff4d4d, #b30000);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
+            transition: 0.3s;
+            font-family: 'Aref Ruqaa', serif;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 77, 77, 0.6);
+        }
+
+        /* خانة كلمة المرور بنفس الخط المزخرف */
+        input {
+            padding: 18px;
+            border-radius: 15px;
+            border: 2px solid #ff4d4d;
+            background: #000;
+            color: white;
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            width: 85%;
+            outline: none;
+            font-family: 'Aref Ruqaa', serif; /* الخط الخرافي هنا أيضاً */
+            box-shadow: inset 0 0 10px rgba(255, 77, 77, 0.2);
+        }
+
+        input::placeholder {
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
 
-    <div class="gradient-bg"></div>
+    <div class="stars-container"></div>
+    <div class="twinkling"></div>
 
-    <div id="lock">
-        <h2 style="margin-bottom:20px; font-family:'Reem Kufi';">مكاننا الخاص يا روان ❤️</h2>
-        <input type="password" id="pass" placeholder="اكتبي كلمة السر...">
-        <button onclick="start()">دخول ❤️</button>
-    </div>
-
-    <audio id="music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="card" id="card">
-        <div class="slide active">
-            <div class="img-box"><img src="https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
-            <h1>يا كل دنيتي ❤️</h1>
-            <p>من يوم ما دخلتي حياتي وكل حاجة بقا ليها طعم تاني، كأن الضحكة مكنتش بتطلع غير ليكي 💕</p>
+    <div class="container">
+        <div id="lockScreen" class="content-box">
+            <h2 style="color: #ff4d4d; font-size: 2.5rem;">الموقع محمي ❤️</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 20px;">انسخ كلمة المرور واكتبها هنا ✨</p>
+            <input type="text" id="passwordInput" placeholder="كل سنه وانتِ طيبه ي رورو🥹💞">
+            <br>
+            <button onclick="checkPassword()">دخول ✨</button>
         </div>
 
-        <div class="slide">
-            <div class="date">منذ أن بدأنا الحديث ✨</div>
-            <div class="counter-box">
-                <span class="counter-num" id="daysCount">0</span>
-                <span class="counter-text">يوم من السعادة معكِ</span>
-            </div>
-            <p>كل يوم بيمر وإنتِ معايا هو عمر جديد بالنسبة لي ❤️</p>
-        </div>
+        <button id="startBtn" style="display: none;" onclick="startSurprise()">اضغط هنا يا روان ✨</button>
 
-        <div class="slide">
-            <div class="date">حلمنا الأول (1) ✨</div>
-            <div class="dream-content">
-                <p>فاكرة لما حلمتي إننا ماشيين وطلبتي تشربي؟ رحتِ تجيبي ماية وفجأة بابا خرج يصلي وماما ظهرت.. التوتر زاد لما لقيتيني واقف وسط ولاد على أول الشارع وقاعد على حاجة بتتحرك وبقولك "هتيجي ازاي؟ ارجعي تاني".. 😂❤️</p>
-            </div>
-        </div>
-
-        <div class="slide">
-            <div class="date">حلمنا الأول (2) ✨</div>
-            <div class="dream-content">
-                <p>اللحظة اللي لمست فيها إيدك بالغلط وبصيتي باستغراب، وضحكت أنا وقلت لك الكلمة اللي طالعة من قلبي: <b>"سلامتك يا قلبي"</b>.. مش مجرد حلم، دي بداية حكايتنا ❤️</p>
-            </div>
-        </div>
-
-        <div class="slide">
-            <div class="img-box"><img src="https://images.pexels.com/photos/715124/pexels-photo-715124.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
-            <h1>إنتِ السكينة 🤍</h1>
-            <p>وجودك جنبي بيهوّن أي حاجة صعبة، إنتِ الأمان اللي كنت بدور عليه 💌</p>
-        </div>
-
-        <div class="slide">
-            <div class="date">24/2/2026</div>
-            <p>اليوم ده مش محتاج يشرح نفسه، هو بس بيعدّي كده بهدوء… كأن في اللحظة دي كان في كلام بيتقال مش بس بين اتنين، لكن بين إحساسين قرروا ما يختفوش بسرعة ✨💕</p>
-        </div>
-
-        <div class="slide">
-            <div class="img-box"><img src="https://images.pexels.com/photos/1759531/pexels-photo-1759531.jpeg?auto=compress&cs=tinysrgb&w=600"></div>
-            <h1>بحبك للأبد 💖</h1>
-            <p>وعد مني هفضل جنبك ومعاكي، ومفيش حاجة في الدنيا هتبعدني عنك يا روان 💘</p>
-        </div>
-
-        <div class="nav">
-            <button onclick="move(-1)">السابق</button>
-            <button onclick="move(1)">التالي</button>
+        <div id="mainContent" style="display: none;" class="content-box">
+            <div id="messageContainer"></div>
+            <div id="finalFooter" style="margin-top: 40px; font-style: italic; color: #ffb3b3; display: none; font-size: 1.6rem;">بكل حب من أحمد إلى روان ❤️</div>
         </div>
     </div>
 
     <script>
-        // وظيفة حساب الأيام
-        function calculateDays() {
-            const startDate = new Date('2026-02-24');
-            const today = new Date();
-            const timeDiff = today - startDate;
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            
-            // لو التاريخ لسه مجاش هيظهر 0، لو جه هيعرض الفرق
-            document.getElementById('daysCount').innerText = days > 0 ? days : 0;
-        }
+        // كلمة المرور المطلوبة بالضبط
+        const pass = "كل سنه وانتِ طيبه ي رورو🥹💞";
 
-        function start() {
-            const pass = document.getElementById('pass').value.toLowerCase();
-            if(pass === 'bahabek ya rewan') {
-                calculateDays(); // تشغيل الحساب عند الدخول
-                document.getElementById('lock').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('lock').style.display = 'none';
-                    document.getElementById('card').style.display = 'block';
-                }, 800);
-                document.getElementById('music').play().catch(e => console.log("الصوت يحتاج تفاعل"));
-            } else { 
-                alert('كلمة السر غلط يا روان ❤️'); 
+        function checkPassword() {
+            const input = document.getElementById("passwordInput").value.trim();
+            if (input === pass) {
+                document.getElementById("lockScreen").style.display = "none";
+                document.getElementById("startBtn").style.display = "block";
+            } else {
+                alert("كلمة المرور غير صحيحة، تأكدي من كتابتها أو نسخها بالكامل ❤️");
             }
         }
-        
-        let cur = 0; 
-        const slides = document.querySelectorAll('.slide');
-        function move(n) {
-            slides[cur].classList.remove('active');
-            cur = (cur + n + slides.length) % slides.length;
-            slides[cur].classList.add('active');
+
+        const messages = [
+            "النهارده مش يوم عادي خالص… النهارده اليوم اللي الدنيا كسبت فيه واحدة زيك 🌍✨",
+            "اليوم اللي اتولدت فيه أجمل ضحكة، وأحن قلب، وألطف روح ممكن حد يقابلها 💖",
+            "16 سنة يا بنتي 😭🎉",
+            "ستاشر سنة من الجمال، والطيبة، والضحك اللي بيغيّر أي يوم وحش لفرحة 💕🌸",
+            "كل سنة وانتي أحلى حاجة حصلت في حياتي ❤️",
+            "بجد مهما كتبت كلام مش هيوصف قد إيه انتي غالية عليا 🫶🏻💘",
+            "انتي الأمان والونس والراحة..",
+            "يارب السنة دي تكون أسعد سنة في حياتك 🎂✨",
+            "16 سنة؟ بقيتي قمر معتمد 🌙💘",
+            "أنا بحبك حب قد السما وأكبر 💞🌍",
+            "بحبك أوي أوي أوي 😭❤️❤️❤️❤️",
+            "وكل سنة وانتي أجمل نعمة في حياتي 💞🫶🏻"
+        ];
+
+        async function showWordByWord(text, containerId, isTitle = false) {
+            const container = document.getElementById(containerId);
+            const p = document.createElement(isTitle ? "h1" : "p");
+            if (!isTitle) p.className = "message-p";
+            
+            // تمييز الكلمات المهمة بلون أحمر
+            if (text.includes("16 سنة") || text.includes("بحبك")) {
+                p.classList.add("highlight");
+            }
+
+            container.appendChild(p);
+
+            const words = text.split(" ");
+            for (let word of words) {
+                const span = document.createElement("span");
+                span.className = "word";
+                span.innerText = word;
+                p.appendChild(span);
+
+                await new Promise(res => setTimeout(res, 250)); // سرعة ظهور الكلمات
+                span.classList.add("visible");
+                
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+            await new Promise(res => setTimeout(res, 600));
+        }
+
+        async function startSurprise() {
+            const audio = document.getElementById("bgMusic");
+            audio.play();
+
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+
+            // إظهار العنوان أولاً كلمة كلمة
+            await showWordByWord("Happy Birthday روان ❤️🎂", "messageContainer", true);
+
+            // إظهار الرسائل
+            for (let msg of messages) {
+                await showWordByWord(msg, "messageContainer");
+            }
+
+            const footer = document.getElementById("finalFooter");
+            footer.style.display = "block";
         }
     </script>
 </body>
